@@ -18,7 +18,6 @@ function monitor_for_song_changes()
             {
                 previous_v = current_v
                 get_song_image_from_thumbnail_and_set_as_image()
-                console.log("song changed");
             }
         }
     }, 500);
@@ -58,7 +57,6 @@ function set_song_image_thumbnail(image_source)
 function get_song_image_from_thumbnail_and_set_as_image()
 {
     var image_source = get_higher_quality_thumbnail()
-    console.log("image source is " + image_source);
     set_song_image_thumbnail(image_source)
 }
 
