@@ -1,22 +1,17 @@
-var previous_v = getVFromParams();
 function getVFromParams()
 {
-    const queryParams = new URLSearchParams(window.location.search);
-    const params = {};
+    var queryParams = new URLSearchParams(window.location.search);
+    if (queryParams)
+        return queryParams.get("v");
 
-    for (const [key, value] of queryParams.entries())
-    {
-        params[key] = value;
-    }
-
-    return params.v;
+    return null;
 }
 
 function monitor_for_song_changes()
 {
     setInterval(function ()
     {
-        current_v = getVFromParams()
+        var current_v = getVFromParams()
         if (current_v)
         {
             if (!previous_v || previous_v != current_v)
@@ -88,4 +83,11 @@ function main()
     monitor_for_song_changes()
 }
 
-main()
+// wait for a little for stuff to catch up / load in
+var millisecondsToWait = 500;
+previous_v = null;
+setTimeout(function ()
+{
+    previous_v = getVFromParams();
+    main()
+}, millisecondsToWait);
