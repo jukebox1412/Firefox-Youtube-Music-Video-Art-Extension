@@ -23,7 +23,6 @@ function monitor_for_song_changes()
             {
                 previous_v = current_v
                 get_song_image_from_thumbnail_and_set_as_image()
-                console.log('song changed')
             }
         }
     }, 500);
@@ -66,9 +65,16 @@ function get_song_image_from_thumbnail_and_set_as_image()
     set_song_image_thumbnail(image_source)
 }
 
+function set_player_padding()
+{
+    var main_panel = document.getElementById("main-panel")
+    main_panel.style.padding = "0px 151px";
+}
+
 function switch_to_song_image()
 {
-    var millisecondsToWait = 1000;
+    var millisecondsToWait = 500;
+    set_player_padding();
     display_song_image()
     setTimeout(function ()
     {
