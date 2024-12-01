@@ -18,6 +18,7 @@ function monitor_for_song_changes()
             {
                 previous_v = current_v
                 get_song_image_from_thumbnail_and_set_as_image()
+                console.log("song changed");
             }
         }
     }, 500);
@@ -25,7 +26,7 @@ function monitor_for_song_changes()
 
 function get_higher_quality_thumbnail()
 {
-    var my_thumbnail = document.querySelector(".image")
+    var my_thumbnail = document.getElementsByClassName("image style-scope ytmusic-player-bar")[0]
     var image_source = my_thumbnail.src
 
     var image_source_without_stuff_after_equal = image_source.split('=')[0]
@@ -57,6 +58,7 @@ function set_song_image_thumbnail(image_source)
 function get_song_image_from_thumbnail_and_set_as_image()
 {
     var image_source = get_higher_quality_thumbnail()
+    console.log("image source is " + image_source);
     set_song_image_thumbnail(image_source)
 }
 
