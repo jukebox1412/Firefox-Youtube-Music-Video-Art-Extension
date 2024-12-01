@@ -1,8 +1,8 @@
 {
     "manifest_version": 2,
-    "name": "Youtube Music Video Or Album Art",
+    "name": "Youtube Music Video Or Song Image",
     "version": "1.1",
-    "description": "Choose between video or album art",
+    "description": "Choose between video or song image on youtube music",
     "icons": {
         "48": "icons/icon.png"
     },
@@ -12,7 +12,7 @@
                 "*://music.youtube.com/*"
             ],
             "js": [
-                "disabler.js"
+                "main.js"
             ]
         }
     ]
