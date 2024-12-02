@@ -1,7 +1,7 @@
 {
     "manifest_version": 2,
     "name": "Youtube Music Song Image",
-    "version": "1.2",
+    "version": "1.3",
     "description": "Always use the thumbnail for songs instead of the video. A future feature will let you switch between video and song image. This extension is not guaranteed to work if you have Youtube Premium / Youtube Music Premium.",
     "icons": {
         "48": "icons/icon-48.png"
