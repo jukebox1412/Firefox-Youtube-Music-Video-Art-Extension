@@ -1,25 +1,8 @@
-function getVFromParams()
-{
-    var queryParams = new URLSearchParams(window.location.search);
-    if (queryParams)
-        return queryParams.get("v");
-
-    return null;
-}
-
 function monitor_for_song_changes()
 {
     setInterval(function ()
     {
-        var current_v = getVFromParams()
-        if (current_v)
-        {
-            if (!previous_v || previous_v != current_v)
-            {
-                previous_v = current_v
-                get_song_image_from_thumbnail_and_set_as_image()
-            }
-        }
+        get_song_image_from_thumbnail_and_set_as_image();
     }, 500);
 }
 
@@ -56,8 +39,20 @@ function set_song_image_thumbnail(image_source)
 
 function get_song_image_from_thumbnail_and_set_as_image()
 {
-    var image_source = get_higher_quality_thumbnail()
-    set_song_image_thumbnail(image_source)
+    var thumbnail_image_source = get_higher_quality_thumbnail();
+    var current_image_source = get_current_song_image();
+    if (thumbnail_image_source && thumbnail_image_source != current_image_source && thumbnail_image_source != "https://music.youtube.com/=w544-h544-l90-rj")
+    {
+        set_player_padding();
+        display_song_image();
+        set_song_image_thumbnail(thumbnail_image_source)
+    }
+}
+
+function get_current_song_image()
+{
+    var song_image_img_element = document.querySelector("#thumbnail > img:nth-child(1)")
+    return song_image_img_element.src
 }
 
 function set_player_padding()
@@ -70,7 +65,7 @@ function switch_to_song_image()
 {
     var millisecondsToWait = 500;
     set_player_padding();
-    display_song_image()
+    display_song_image();
     setTimeout(function ()
     {
         get_song_image_from_thumbnail_and_set_as_image()
@@ -79,15 +74,8 @@ function switch_to_song_image()
 
 function main()
 {
-    switch_to_song_image();
+    // switch_to_song_image();
     monitor_for_song_changes()
 }
 
-// wait for a little for stuff to catch up / load in
-var millisecondsToWait = 500;
-previous_v = null;
-setTimeout(function ()
-{
-    previous_v = getVFromParams();
-    main()
-}, millisecondsToWait);
+main();
