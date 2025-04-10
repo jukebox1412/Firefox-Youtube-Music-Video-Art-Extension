@@ -7,9 +7,13 @@ function monitor_for_song_changes() {
 function get_higher_quality_thumbnail() {
     var my_thumbnail = document.getElementsByClassName("image style-scope ytmusic-player-bar")[0]
     var image_source = my_thumbnail.src
-
-    var image_source_without_stuff_after_equal = image_source.split('=')[0]
-    return image_source_without_stuff_after_equal + "=w544-h544-l90-rj"
+    if (image_source.includes("locker.png?sqp=-")) {
+        return image_source;
+    }
+    else {
+        var image_source_without_stuff_after_equal = image_source.split('=')[0]
+        return image_source_without_stuff_after_equal + "=w544-h544-l90-rj"
+    }
 }
 
 function display_song_image() {
@@ -33,9 +37,6 @@ function set_song_image_thumbnail(image_source) {
 
 function get_song_image_from_thumbnail_and_set_as_image() {
     var thumbnail_image_source = get_higher_quality_thumbnail();
-    if (thumbnail_image_source && thumbnail_image_source.includes("https://www.gstatic.com/youtube/media/ytm/images/cover_track_default")) {
-        return; // thumbnail for this song is default image, probably means it's an uploaded album
-    }
 
     var current_image_source = get_current_song_image();
     if (thumbnail_image_source && thumbnail_image_source != current_image_source && thumbnail_image_source != "https://music.youtube.com/=w544-h544-l90-rj") {
